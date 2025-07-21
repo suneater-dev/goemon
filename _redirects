@@ -1,0 +1,16 @@
+# Netlify redirects file for Goemon website
+# This ensures proper handling of single-page application routing
+
+# Handle all routes by serving index.html
+/*    /index.html   200
+
+# Optional: Redirect common social media platforms to placeholder
+/twitter    https://twitter.com/goemon   302
+/discord    https://discord.gg/goemon    302
+/telegram   https://t.me/goemon          302
+
+# Optional: Handle legacy URLs
+/home       /                          301
+/token      /#tokenomics              301
+/community  /#community               301
+/about      /#about                   301

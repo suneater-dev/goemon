@@ -1,0 +1,3949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOEMON | The Legendary Thief Token - Solana Memecoin</title>
+    <meta name="description" content="Join the legendary rebellion against traditional finance with GOEMON token. Steal from the institutions, give to the people. Built on Solana blockchain.">
+    <meta name="keywords" content="Goemon, memecoin, Solana, cryptocurrency, DeFi, token, blockchain, crypto">
+    <meta name="author" content="Goemon Token">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://goemon.com">
+    <meta property="og:title" content="GOEMON | The Legendary Thief Token">
+    <meta property="og:description" content="Join the legendary rebellion against traditional finance with GOEMON token on Solana.">
+    <meta property="og:image" content="https://goemon.com/assets/images/icons/Logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://goemon.com">
+    <meta property="twitter:title" content="GOEMON | The Legendary Thief Token">
+    <meta property="twitter:description" content="Join the legendary rebellion against traditional finance with GOEMON token on Solana.">
+    <meta property="twitter:image" content="https://goemon.com/assets/images/icons/Logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/icons/Logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/icons/Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/icons/Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/icons/Logo.png">
+    
+    <!-- Fonts with fallbacks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Goemon Token",
+        "description": "The Legendary Thief Token - A Solana-based memecoin inspired by Ishikawa Goemon",
+        "url": "https://goemon.com",
+        "logo": "https://goemon.com/assets/images/icons/Logo.png",
+        "sameAs": [
+            "https://twitter.com/goemon",
+            "https://discord.gg/goemon",
+            "https://t.me/goemon"
+        ]
+    }
+    </script>
+    
+    <style>
+        /* Reset and Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Traditional Japanese Color Palette */
+            --primary-cream: #F5F5DC;
+            --warm-beige: #E6D7C3;
+            --light-paper: #FBF8F1;
+            --dark-brown: #3C2415;
+            --medium-brown: #5D4037;
+            --traditional-red: #CC2936;
+            --crimson-red: #DC143C;
+            --deep-red: #8B0000;
+            --mountain-brown: #6D4C41;
+            --mountain-gray: #8D6E63;
+            --charcoal: #212121;
+            --ink-black: #000000;
+            --gold-accent: #FFD700;
+            --soft-gold: #F4E4BC;
+            
+            --font-primary: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            --font-decorative: 'Cinzel', 'Times New Roman', serif;
+            --font-elegant: 'Crimson Text', 'Georgia', serif;
+            
+            --gradient-cream: linear-gradient(135deg, #F5F5DC 0%, #E6D7C3 50%, #DDD0C0 100%);
+            --gradient-red: linear-gradient(135deg, #CC2936 0%, #8B0000 100%);
+            --gradient-brown: linear-gradient(135deg, #5D4037 0%, #3C2415 100%);
+            --paper-texture: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F4E4BC' fill-opacity='0.1'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--dark-brown);
+            background: var(--gradient-cream);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* Performance optimization */
+        * {
+            will-change: auto;
+        }
+
+        .character-avatar,
+        .character-main,
+        .petal,
+        .hero-image,
+        .video-background {
+            will-change: transform;
+        }
+
+        /* Media Elements Styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+
+        /* Video Background Support */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245,245,220,0.8) 0%, rgba(230,215,195,0.6) 100%);
+            z-index: 2;
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Hero Image Styling */
+        .hero-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .hero-background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Character Image Styling */
+        .character-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        /* Story Illustration Layout */
+        .story-illustration {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(245,245,220,0.1) 0%, rgba(230,215,195,0.1) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--traditional-red);
+        }
+
+        .story-character-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            max-width: 85%;
+            max-height: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: characterFloat 4s ease-in-out infinite;
+        }
+
+        .story-character-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .story-character-container:hover .story-character-image {
+            transform: scale(1.02);
+            filter: drop-shadow(0 20px 50px rgba(204, 41, 54, 0.4));
+        }
+
+        /* Alpha Video Background */
+        .alpha-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 17px;
+        }
+
+        .alpha-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.4;
+            mix-blend-mode: overlay;
+        }
+
+        /* Traditional decorative frame */
+        .story-illustration::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--gold-accent);
+            border-radius: 25px;
+            opacity: 0.6;
+            z-index: 2;
+            animation: frameGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes frameGlow {
+            0%, 100% { 
+                opacity: 0.6; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: scale(1.01);
+            }
+        }
+
+        /* Legacy character image container for fallback */
+        .character-image-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: characterFloat 4s ease-in-out infinite, characterGlow 6s ease-in-out infinite;
+        }
+
+        .character-image-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            border: 3px solid var(--traditional-red);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: outerRingRotate 20s linear infinite;
+            z-index: 1;
+        }
+
+        .character-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+            z-index: 2;
+            position: relative;
+        }
+
+        .character-image-container:hover .character-image {
+            transform: scale(1.05);
+            filter: drop-shadow(0 15px 40px rgba(204, 41, 54, 0.4));
+        }
+
+        /* Background Image Support */
+        .section-with-bg {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .section-with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245,245,220,0.9) 0%, rgba(230,215,195,0.8) 100%);
+            z-index: 1;
+        }
+
+        .section-with-bg .section-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Clean Traditional Japanese Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Subtle Red Sun */
+                radial-gradient(circle 100px at 80% 20%, rgba(204, 41, 54, 0.3) 0%, transparent 60%),
+                /* Minimal paper texture */
+                var(--paper-texture),
+                var(--gradient-cream);
+            background-size: 100% 100%, 80px 80px, 100% 100%;
+            background-repeat: no-repeat, repeat, no-repeat;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        /* Subtle mountain silhouettes */
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to top, rgba(93, 64, 55, 0.1) 0%, transparent 100%);
+            clip-path: polygon(0 100%, 20% 70%, 40% 85%, 60% 60%, 80% 75%, 100% 65%, 100% 100%);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Floating Cherry Blossoms Animation */
+        .floating-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.7);
+            animation: floatDown linear infinite;
+            opacity: 0;
+            will-change: transform;
+        }
+        
+        .petal.small { font-size: 8px; }
+        .petal.medium { font-size: 14px; }
+        .petal.large { font-size: 20px; }
+
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100px) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            25% {
+                transform: translateY(25vh) translateX(-20px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(50vh) translateX(15px) rotate(180deg);
+            }
+            75% {
+                transform: translateY(75vh) translateX(-10px) rotate(270deg);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(5px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--primary-cream);
+            border-bottom: 3px solid var(--traditional-red);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(60, 36, 21, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 90px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-main {
+            font-size: 2rem;
+            font-family: var(--font-decorative);
+            font-weight: 700;
+            color: var(--ink-black);
+            letter-spacing: 2px;
+        }
+
+        .logo-japanese {
+            font-size: 0.9rem;
+            color: var(--traditional-red);
+            letter-spacing: 4px;
+            margin-top: -5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover {
+            color: var(--traditional-red);
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .wallet-btn {
+            background: var(--gradient-red);
+            color: var(--primary-cream);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(204, 41, 54, 0.3);
+        }
+
+        .wallet-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(204, 41, 54, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--traditional-red);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 90px;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-height: 65vh;
+            justify-content: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .hero-character {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .main-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero-logo-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .title-japanese {
+            font-size: 1.5rem;
+            color: var(--traditional-red);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        .title-main {
+            font-size: 5rem;
+            font-family: var(--font-decorative);
+            font-weight: 700;
+            color: var(--ink-black);
+            line-height: 0.9;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-subtitle {
+            font-size: 1.8rem;
+            color: var(--traditional-red);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: var(--font-elegant);
+        }
+
+        .title-subtitle-japanese {
+            font-size: 1.2rem;
+            color: var(--medium-brown);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+
+        .hero-logo-image {
+            height: 200px;
+            width: auto;
+            max-width: 600px;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
+            transition: all 0.3s ease;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        /* Simple Hero Character - Clean Display */
+        .hero-character-simple {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-character-clean {
+            max-width: 520px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+            animation: characterFloat 4s ease-in-out infinite;
+            border-radius: 20px;
+        }
+
+        .hero-character-clean:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 25px 70px rgba(204, 41, 54, 0.4));
+        }
+
+        .hero-logo-image:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 12px 35px rgba(204, 41, 54, 0.3));
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 20px 60px rgba(204, 41, 54, 0.6)) drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+                transform: scale(1.05);
+            }
+        }
+
+        /* Social Media Icons under title */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .social-btn {
+            display: block;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-btn-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn:hover .social-btn-img {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(204, 41, 54, 0.4);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        .social-btn:active .social-btn-img {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* Legacy fallback social icons */
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--charcoal);
+            color: var(--primary-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--charcoal);
+        }
+
+        .social-icon:hover {
+            background: var(--traditional-red);
+            border-color: var(--traditional-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(204, 41, 54, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: var(--medium-brown);
+            margin-bottom: 3rem;
+            font-style: italic;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 16px 32px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient-red);
+            color: var(--primary-cream);
+            box-shadow: 0 6px 20px rgba(204, 41, 54, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(204, 41, 54, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark-brown);
+            border: 2px solid var(--traditional-red);
+        }
+
+        .btn-secondary:hover {
+            background: var(--traditional-red);
+            color: var(--primary-cream);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(204, 41, 54, 0.3);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(251, 248, 241, 0.8);
+            border-radius: 15px;
+            border: 2px solid var(--gold-accent);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--traditional-red);
+            font-family: var(--font-decorative);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--medium-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Character Display - Traditional Style */
+        .character-display {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .character-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            background: var(--soft-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            border: 6px solid var(--charcoal);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            animation: characterFloat 4s ease-in-out infinite, characterGlow 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .character-main::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 3px solid var(--traditional-red);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: outerRingRotate 20s linear infinite;
+        }
+
+        @keyframes characterGlow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(204, 41, 54, 0.3), 0 0 60px rgba(204, 41, 54, 0.1);
+            }
+        }
+
+        @keyframes outerRingRotate {
+            0% { 
+                transform: rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                opacity: 1;
+            }
+            100% { 
+                transform: rotate(360deg) scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .coin {
+            position: absolute;
+            font-size: 2rem;
+            animation: coinFloat 4s ease-in-out infinite;
+            filter: sepia(100%) saturate(200%) hue-rotate(30deg);
+        }
+
+        .coin-1 { top: 20%; left: 15%; animation-delay: -1s; }
+        .coin-2 { top: 70%; right: 20%; animation-delay: -2s; }
+        .coin-3 { top: 40%; left: 5%; animation-delay: -3s; }
+
+        @keyframes characterFloat {
+            0%, 100% { 
+                transform: translate(-50%, -50%) translateY(0px); 
+            }
+            50% { 
+                transform: translate(-50%, -50%) translateY(-15px); 
+            }
+        }
+
+        @keyframes coinFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-40px) rotate(180deg); opacity: 0.6; }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-family: var(--font-decorative);
+            font-weight: 700;
+            color: var(--ink-black);
+            margin-bottom: 1rem;
+        }
+
+        .section-decoration {
+            width: 120px;
+            height: 3px;
+            background: var(--gradient-red);
+            margin: 0 auto;
+            border-radius: 2px;
+            position: relative;
+            animation: decorationGlow 4s ease-in-out infinite;
+        }
+
+        .section-decoration::before,
+        .section-decoration::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--traditional-red);
+            border-radius: 50%;
+            animation: dotPulse 3s ease-in-out infinite;
+        }
+
+        .section-decoration::before { 
+            left: -20px; 
+            animation-delay: 0.5s;
+        }
+        .section-decoration::after { 
+            right: -20px; 
+            animation-delay: 1s;
+        }
+
+        @keyframes decorationGlow {
+            0%, 100% { 
+                opacity: 1;
+                transform: scaleX(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: scaleX(1.05);
+            }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { 
+                transform: translateY(-50%) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(-50%) scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* About Section - Story Book Layout */
+        .about {
+            background: rgba(251, 248, 241, 0.5);
+            padding: 8rem 0;
+        }
+
+        .story-book-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: stretch;
+            min-height: 600px;
+        }
+
+        .story-page {
+            background: var(--light-paper);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(60, 36, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-text-page {
+            padding: 3rem;
+            border: 3px solid var(--charcoal);
+        }
+
+        .story-text-page::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            right: 20px;
+            height: 20px;
+            background: var(--traditional-red);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .page-content h3 {
+            color: var(--traditional-red);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-decorative);
+        }
+
+        .page-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-brown);
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-highlight {
+            font-size: 1.2rem;
+            color: var(--traditional-red);
+            font-style: italic;
+            font-weight: 600;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(204, 41, 54, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--traditional-red);
+            margin: 2rem 0;
+        }
+
+        .story-image-page {
+            border: 3px solid var(--traditional-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .story-illustration-large {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 17px;
+            overflow: hidden;
+        }
+
+        .story-character-container-large {
+            position: relative;
+            z-index: 3;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-character-image-large {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .story-character-container-large:hover .story-character-image-large {
+            transform: scale(1.02);
+            filter: drop-shadow(0 15px 40px rgba(204, 41, 54, 0.4));
+        }
+
+        /* Legacy About Section styles for fallback */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark-brown);
+        }
+
+        .about-text h3 {
+            color: var(--traditional-red);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-decorative);
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+        }
+
+        .scroll-art {
+            background: var(--light-paper);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(60, 36, 21, 0.2);
+            border: 3px solid var(--charcoal);
+            position: relative;
+        }
+
+        .scroll-art::before,
+        .scroll-art::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            width: 25px;
+            height: 25px;
+            background: var(--traditional-red);
+            border-radius: 50%;
+            border: 2px solid var(--charcoal);
+        }
+
+        .scroll-art::before { left: 30px; }
+        .scroll-art::after { right: 30px; }
+
+        .japanese-calligraphy {
+            font-size: 4rem;
+            color: var(--ink-black);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .translation {
+            font-size: 1.3rem;
+            color: var(--medium-brown);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Characters Section - Ukiyo-e Style */
+        .characters {
+            background: rgba(230, 215, 195, 0.3);
+        }
+
+        .lore-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 4rem;
+        }
+        
+        .lore-main-content {
+            flex: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+        
+        .lore-side-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lore-logo {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+        
+        .lore-logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 15px 40px rgba(204, 41, 54, 0.3));
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+            }
+            50% { 
+                transform: translateY(-10px);
+            }
+        }
+        
+        .lore-title {
+            font-size: 2.5rem;
+            font-family: var(--font-decorative);
+            color: var(--traditional-red);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            line-height: 1.2;
+        }
+        
+        .lore-subtitle {
+            font-size: 2.2rem;
+            color: var(--charcoal);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.3;
+        }
+        
+        .lore-description {
+            font-size: 1.6rem;
+            line-height: 1.9;
+            color: var(--charcoal);
+            font-family: var(--font-elegant);
+            text-align: center;
+            max-width: 900px;
+            font-weight: 400;
+        }
+
+        .character-card {
+            background: var(--light-paper);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 3px solid var(--charcoal);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(60, 36, 21, 0.1);
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(204, 41, 54, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .character-card:hover::before {
+            left: 100%;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(60, 36, 21, 0.2);
+            border-color: var(--traditional-red);
+        }
+
+        .character-avatar-img {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .character-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            animation: characterBreathe 4s ease-in-out infinite;
+        }
+
+        .character-avatar-img::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid var(--traditional-red);
+            border-radius: 20px;
+            opacity: 0.7;
+            animation: borderPulse 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .character-card:hover .character-img {
+            transform: scale(1.05);
+            animation-play-state: paused;
+        }
+
+        .character-card:hover .character-avatar-img::before {
+            opacity: 1;
+        }
+
+        /* Legacy character avatar styling */
+        .character-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 4px solid var(--charcoal);
+            background: var(--soft-gold);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: characterBreathe 4s ease-in-out infinite;
+        }
+
+        .character-avatar::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid var(--traditional-red);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+
+        .character-card:hover .character-avatar {
+            transform: scale(1.1);
+            animation-play-state: paused;
+        }
+
+        @keyframes characterBreathe {
+            0%, 100% { 
+                transform: scale(1); 
+            }
+            50% { 
+                transform: scale(1.02); 
+            }
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { 
+                opacity: 0.7; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.01);
+            }
+        }
+
+        .character-name {
+            color: var(--traditional-red);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-decorative);
+        }
+
+        .character-title {
+            color: var(--medium-brown);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .character-description {
+            color: var(--dark-brown);
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .main-character {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(244, 228, 188, 0.5) 0%, rgba(251, 248, 241, 0.8) 100%);
+        }
+
+        .villain-character {
+            border-color: var(--traditional-red);
+            background: linear-gradient(135deg, rgba(204, 41, 54, 0.1) 0%, rgba(251, 248, 241, 0.8) 100%);
+        }
+
+        /* Sacred Scroll - Redesigned Tokenomics */
+        .tokenomics {
+            background: linear-gradient(135deg, rgba(244, 228, 188, 0.4) 0%, rgba(230, 215, 195, 0.3) 100%);
+            padding: 8rem 0;
+        }
+
+        .sacred-scroll-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .scroll-background {
+            background: linear-gradient(135deg, #FBF8F1 0%, #F5F5DC 50%, #E6D7C3 100%);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 80px rgba(60, 36, 21, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 5px solid var(--charcoal);
+        }
+
+        .scroll-video {
+            opacity: 0.3;
+            mix-blend-mode: overlay;
+        }
+
+        .scroll-content {
+            position: relative;
+            z-index: 3;
+            padding: 4rem 3rem;
+            background: linear-gradient(
+                135deg,
+                rgba(251, 248, 241, 0.95) 0%,
+                rgba(245, 245, 220, 0.9) 50%,
+                rgba(230, 215, 195, 0.95) 100%
+            );
+        }
+
+        .scroll-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid var(--traditional-red);
+            padding-bottom: 2rem;
+        }
+
+        .scroll-title {
+            font-size: 3rem;
+            font-family: var(--font-primary);
+            color: var(--traditional-red);
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-subtitle {
+            font-size: 1.3rem;
+            color: var(--medium-brown);
+            font-family: var(--font-elegant);
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .scroll-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .scroll-section {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold-accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .section-ornament {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--traditional-red);
+            color: var(--primary-cream);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 3px solid var(--gold-accent);
+        }
+
+        .scroll-section h4 {
+            color: var(--traditional-red);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-family: var(--font-decorative);
+        }
+
+        .elegant-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(244, 228, 188, 0.4);
+            border-radius: 15px;
+            border-left: 4px solid var(--traditional-red);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(244, 228, 188, 0.6);
+            transform: translateX(5px);
+        }
+
+        .info-symbol {
+            font-size: 2rem;
+            color: var(--traditional-red);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: var(--medium-brown);
+            font-size: 1.1rem;
+        }
+
+        .info-desc {
+            color: var(--dark-brown);
+            font-size: 0.95rem;
+        }
+
+        .distribution-elegant {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .dist-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .dist-visual {
+            margin-bottom: 1rem;
+        }
+
+        .dist-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--traditional-red) 0deg, var(--traditional-red) calc(var(--percent, 70) * 3.6deg), rgba(244, 228, 188, 0.5) calc(var(--percent, 70) * 3.6deg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: rotateCircle 3s ease-in-out infinite;
+        }
+
+        .dist-circle::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--light-paper);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .dist-percent {
+            position: relative;
+            z-index: 2;
+            font-weight: 700;
+            color: var(--traditional-red);
+            font-size: 1rem;
+        }
+
+        .dist-label {
+            color: var(--dark-brown);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        @keyframes rotateCircle {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .scroll-footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gold-accent);
+        }
+
+        .contract-section {
+            background: rgba(204, 41, 54, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--traditional-red);
+            position: relative;
+        }
+
+        .contract-label {
+            color: var(--traditional-red);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-decorative);
+        }
+
+        .contract-address-elegant {
+            font-family: var(--font-decorative);
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contract-address-elegant:hover {
+            color: var(--traditional-red);
+            transform: scale(1.05);
+        }
+
+        .contract-note {
+            color: var(--medium-brown);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .scroll-rods {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .scroll-rod {
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(45deg, #8B4513, #D2691E);
+            border-radius: 10px;
+            box-shadow: 
+                inset -3px 0 5px rgba(0, 0, 0, 0.3),
+                inset 3px 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .scroll-rod-left {
+            left: -25px;
+            animation: rodFloat 4s ease-in-out infinite;
+        }
+
+        .scroll-rod-right {
+            right: -25px;
+            animation: rodFloat 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes rodFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Legacy tokenomics styles for fallback */
+        .tokenomics-scroll {
+            background: var(--light-paper);
+            border-radius: 20px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(60, 36, 21, 0.2);
+            border: 4px solid var(--charcoal);
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            background: rgba(230, 215, 195, 0.3);
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        .timeline-line {
+            display: none;
+        }
+
+        .roadmap-phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            height: 100%;
+        }
+
+        .phase-content {
+            width: 100%;
+            background: var(--light-paper);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 3px solid var(--traditional-red);
+            margin-top: 1.5rem;
+            box-shadow: 0 15px 40px rgba(60, 36, 21, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .phase-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(60, 36, 21, 0.2);
+            border-color: var(--traditional-red);
+        }
+
+        .phase-marker {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--soft-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 4px solid var(--charcoal);
+            box-shadow: 0 0 20px rgba(60, 36, 21, 0.2);
+            z-index: 2;
+            position: relative;
+        }
+
+        .phase-marker::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid var(--traditional-red);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .phase-completed .phase-marker {
+            background: linear-gradient(135deg, #4CAF50, var(--soft-gold));
+        }
+
+        .phase-active .phase-marker {
+            background: var(--gradient-red);
+            color: var(--primary-cream);
+        }
+
+        .phase-title {
+            color: var(--traditional-red);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: var(--font-decorative);
+        }
+
+        .phase-description {
+            color: var(--dark-brown);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-features {
+            list-style: none;
+        }
+
+        .phase-features li {
+            color: var(--dark-brown);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .phase-features li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--traditional-red);
+        }
+
+        .phase-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .phase-completed .phase-status {
+            background: #4CAF50;
+            color: var(--primary-cream);
+        }
+
+        .phase-active .phase-status {
+            background: var(--traditional-red);
+            color: var(--primary-cream);
+        }
+
+        .phase-upcoming .phase-status {
+            background: var(--medium-brown);
+            color: var(--primary-cream);
+        }
+
+        /* Community Section */
+        .community {
+            background: rgba(251, 248, 241, 0.5);
+        }
+
+        /* Enhanced Rebellion Section */
+        .rebellion-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--charcoal) 0%, #1a1a1a 50%, var(--charcoal) 100%);
+        }
+        
+        .rebellion-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(204, 41, 54, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(204, 41, 54, 0.1) 0%, transparent 50%);
+        }
+        
+        .rebellion-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23CC2936' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .rebellion-header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .rebellion-title {
+            font-size: 4rem;
+            color: var(--primary-cream);
+            text-shadow: 0 0 20px rgba(204, 41, 54, 0.5);
+            margin-bottom: 1rem;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        
+        .rebellion-subtitle {
+            font-size: 1.5rem;
+            color: var(--warm-beige);
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(204, 41, 54, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(204, 41, 54, 0.8), 0 0 40px rgba(204, 41, 54, 0.3); }
+        }
+        
+        .rebellion-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rebellion-stat {
+            background: linear-gradient(135deg, var(--light-paper) 0%, rgba(245, 245, 220, 0.9) 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 3px solid var(--traditional-red);
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rebellion-stat::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(204, 41, 54, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .rebellion-stat:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(20px, 20px);
+        }
+        
+        .rebellion-stat:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(204, 41, 54, 0.4);
+            border-color: var(--soft-gold);
+        }
+        
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stat-number-large {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--traditional-red);
+            font-family: var(--font-decorative);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-description {
+            color: var(--dark-brown);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* CTA Banner */
+        .rebellion-cta-banner {
+            background: linear-gradient(135deg, var(--traditional-red) 0%, #8B0000 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--soft-gold);
+        }
+        
+        .cta-banner-title {
+            font-size: 2.5rem;
+            color: var(--primary-cream);
+            font-family: var(--font-decorative);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-banner-subtitle {
+            font-size: 1.3rem;
+            color: var(--warm-beige);
+            font-style: italic;
+        }
+        
+        /* Rebellion Weapons (Social Buttons) */
+        .rebellion-weapons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .weapon-button {
+            background: linear-gradient(135deg, var(--light-paper) 0%, rgba(245, 245, 220, 0.95) 100%);
+            border: 3px solid var(--charcoal);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weapon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(204, 41, 54, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .weapon-button:hover::before {
+            left: 100%;
+        }
+        
+        .weapon-button:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--traditional-red);
+            box-shadow: 0 20px 50px rgba(204, 41, 54, 0.3);
+        }
+        
+        .weapon-icon {
+            margin-right: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .weapon-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease;
+        }
+        
+        .weapon-button:hover .weapon-img {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .weapon-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .weapon-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-decorative);
+        }
+        
+        .weapon-desc {
+            font-size: 1.1rem;
+            color: var(--dark-brown);
+            font-style: italic;
+        }
+        
+        /* Final Rebellion Call */
+        .final-rebellion-call {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #1a1a1a 100%);
+            border: 3px solid var(--traditional-red);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .final-call-title {
+            font-size: 3rem;
+            color: var(--primary-cream);
+            font-family: var(--font-decorative);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(204, 41, 54, 0.6);
+            animation: finalCallPulse 2s ease-in-out infinite;
+        }
+        
+        .final-call-text {
+            font-size: 1.4rem;
+            color: var(--warm-beige);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-rebellion {
+            background: linear-gradient(135deg, var(--traditional-red) 0%, #8B0000 100%);
+            color: var(--primary-cream);
+            border: none;
+            padding: 1.5rem 3rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(204, 41, 54, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-rebellion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn-rebellion:hover::before {
+            left: 100%;
+        }
+        
+        .btn-rebellion:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(204, 41, 54, 0.6);
+        }
+        
+        @keyframes finalCallPulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(204, 41, 54, 0.6); }
+            50% { text-shadow: 0 0 30px rgba(204, 41, 54, 0.9), 0 0 40px rgba(204, 41, 54, 0.4); }
+        }
+
+        .social-button-large {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--light-paper);
+            border: 3px solid var(--charcoal);
+            border-radius: 25px;
+            color: var(--dark-brown);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(60, 36, 21, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-button-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(204, 41, 54, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .social-button-large:hover::before {
+            left: 100%;
+        }
+
+        .social-button-large:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(204, 41, 54, 0.3);
+            border-color: var(--traditional-red);
+        }
+
+        .social-button-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-button-large:hover .social-button-img {
+            transform: scale(1.1);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        .social-button-label {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--traditional-red);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-button-large:hover .social-button-label {
+            color: var(--dark-brown);
+        }
+
+        /* Legacy social grid styles for fallback */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--light-paper);
+            border: 2px solid var(--charcoal);
+            border-radius: 25px;
+            color: var(--dark-brown);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(60, 36, 21, 0.1);
+        }
+
+        .social-link:hover {
+            background: var(--traditional-red);
+            color: var(--primary-cream);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(204, 41, 54, 0.3);
+        }
+
+        .social-icon {
+            font-size: 1.8rem;
+        }
+
+        .final-cta {
+            background: var(--light-paper);
+            padding: 4rem;
+            border-radius: 25px;
+            border: 3px solid var(--charcoal);
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(60, 36, 21, 0.2);
+        }
+
+        .final-cta h3 {
+            color: var(--traditional-red);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-decorative);
+        }
+
+        .final-cta p {
+            color: var(--dark-brown);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        /* Enhanced Footer */
+        .enhanced-footer {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #1a1a1a 50%, var(--charcoal) 100%);
+            border-top: 4px solid var(--traditional-red);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(204, 41, 54, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(204, 41, 54, 0.1) 0%, transparent 50%);
+        }
+        
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23CC2936' fill-opacity='0.03'%3E%3Cpath d='M20 20.5V18H18v2.5h-2.5V22H18v2.5h2V22h2.5v-1.5H20zm0-13V5H18v2.5h-2.5V9H18v2.5h2V9h2.5V7.5H20zm13 13V18h-2v2.5h-2.5V22H31v2.5h2V22h2.5v-1.5H33zm0-13V5h-2v2.5h-2.5V9H31v2.5h2V9h2.5V7.5H33zM7 20.5V18H5v2.5H2.5V22H5v2.5h2V22h2.5v-1.5H7zm0-13V5H5v2.5H2.5V9H5v2.5h2V9h2.5V7.5H7z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-section {
+            text-align: left;
+        }
+        
+        .footer-logo-section {
+            text-align: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo-img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+        
+        .footer-tagline {
+            color: var(--warm-beige);
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .footer-section-title {
+            color: var(--traditional-red);
+            font-size: 1.4rem;
+            font-family: var(--font-decorative);
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .footer-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .footer-nav-link {
+            color: var(--warm-beige);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-nav-link:hover {
+            color: var(--primary-cream);
+            text-shadow: 0 0 10px rgba(204, 41, 54, 0.5);
+            transform: translateX(5px);
+        }
+        
+        .footer-social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            color: var(--warm-beige);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 10px;
+            background: rgba(204, 41, 54, 0.1);
+        }
+        
+        .footer-social-link:hover {
+            color: var(--primary-cream);
+            background: rgba(204, 41, 54, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .footer-social-img {
+            width: 30px;
+            height: 30px;
+            margin-right: 1rem;
+            object-fit: contain;
+        }
+        
+        /* Disclaimer Section */
+        .disclaimer-section {
+            background: linear-gradient(135deg, #8B0000 0%, var(--traditional-red) 100%);
+            border-top: 2px solid var(--soft-gold);
+            border-bottom: 2px solid var(--soft-gold);
+            padding: 3rem 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .disclaimer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .disclaimer-title {
+            color: var(--primary-cream);
+            font-size: 1.8rem;
+            font-family: var(--font-decorative);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+        
+        .disclaimer-text {
+            color: var(--primary-cream);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            text-align-last: center;
+        }
+        
+        .disclaimer-text strong {
+            color: var(--soft-gold);
+            font-weight: 700;
+        }
+        
+        .risk-warning {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--soft-gold);
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: var(--soft-gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .risk-icon {
+            font-size: 1.5rem;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes warningPulse {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Footer Bottom */
+        .footer-bottom {
+            background: var(--charcoal);
+            border-top: 1px solid var(--medium-brown);
+            padding: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-bottom-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-copyright {
+            color: var(--warm-beige);
+            font-size: 0.9rem;
+        }
+        
+        .footer-legal-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-legal-links a {
+            color: var(--traditional-red);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-legal-links a:hover {
+            color: var(--primary-cream);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                min-height: auto;
+            }
+            
+            .main-title {
+                text-align: center;
+            }
+            
+            .hero-logo-container {
+                justify-content: center;
+            }
+
+            .story-illustration {
+                max-width: 500px;
+                height: 400px;
+            }
+
+            .story-book-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .scroll-sections {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .roadmap-timeline {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .social-buttons-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .main-character {
+                grid-column: span 1;
+            }
+
+            .tokenomics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lore-content {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 3rem 2rem;
+            }
+            
+            .lore-logo {
+                width: 120px;
+            }
+            
+            .lore-title {
+                font-size: 2rem;
+            }
+            
+            .lore-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .lore-description {
+                font-size: 1.4rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .title-main {
+                font-size: 3.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .characters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-phase {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .phase-content {
+                margin: 1rem 0;
+            }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .title-main {
+                font-size: 2.8rem;
+            }
+
+            .character-display {
+                width: 300px;
+                height: 300px;
+            }
+
+            .character-main {
+                width: 220px;
+                height: 220px;
+                font-size: 7rem;
+            }
+
+            .character-image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .character-avatar-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .social-btn-img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .hero-image-container {
+                opacity: 0.15;
+            }
+
+            .logo-image {
+                height: 40px !important;
+            }
+
+            .story-illustration {
+                max-width: 350px;
+                height: 300px;
+            }
+
+            .scroll-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .scroll-title {
+                font-size: 2rem;
+            }
+
+            .distribution-elegant {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .scroll-rod {
+                display: none;
+            }
+
+            .hero-logo-image {
+                max-height: 120px;
+                max-width: 350px;
+            }
+
+            .hero-character-clean {
+                max-height: 350px;
+            }
+
+            .roadmap-timeline {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .social-button-img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Media Responsiveness */
+        @media (max-width: 1024px) {
+            .character-image-container {
+                width: 240px;
+                height: 240px;
+            }
+
+            .hero-image-container {
+                opacity: 0.25;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .character-image-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .social-btn-img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-icons {
+                gap: 1rem;
+            }
+
+            .character-avatar-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .video-background {
+                opacity: 0.5;
+            }
+
+            .section-with-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Reduce motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .character-image-container,
+            .video-background {
+                animation: none;
+            }
+
+            .character-image {
+                transition: none;
+            }
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: var(--primary-cream);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 3rem;
+                transition: left 0.3s ease;
+                z-index: 999;
+                border-right: 3px solid var(--traditional-red);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-link {
+                font-size: 1.3rem;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(204, 41, 54, 0.2), transparent);
+            animation: loading 2s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-cream: #FFFFFF;
+                --dark-brown: #000000;
+                --traditional-red: #FF0000;
+                --charcoal: #000000;
+            }
+        }
+
+        /* Music Control Panel */
+        .music-control-panel {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--light-paper);
+            border: 3px solid var(--traditional-red);
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .music-control-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(204, 41, 54, 0.4);
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .music-btn {
+            background: var(--traditional-red);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(204, 41, 54, 0.3);
+        }
+
+        .music-btn:hover {
+            background: var(--deep-red);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(204, 41, 54, 0.5);
+        }
+
+        .music-icon {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .volume-control {
+            margin-left: 0.5rem;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 6px;
+            background: var(--warm-beige);
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .volume-slider:hover {
+            opacity: 1;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--traditional-red);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(204, 41, 54, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(204, 41, 54, 0.6);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--traditional-red);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(204, 41, 54, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .music-label {
+            font-size: 0.8rem;
+            color: var(--traditional-red);
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Music Controls */
+        @media (max-width: 768px) {
+            .music-control-panel {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem;
+            }
+
+            .music-btn {
+                width: 35px;
+                height: 35px;
+            }
+
+            .music-icon {
+                font-size: 1rem;
+            }
+
+            .volume-slider {
+                width: 60px;
+            }
+
+            .music-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .floating-petals,
+            .nav,
+            .hero-actions,
+            .social-icons,
+            .final-cta,
+            .music-control-panel {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Cherry Blossoms -->
+    <div class="floating-petals" id="petalContainer">
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" preload="auto" loop autoplay>
+        <source src="./assets/music/goemon-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./assets/images/icons/Logo-type.png" 
+                     alt="Goemon - 私たちは取る。私たちは与えます" 
+                     class="logo-image lazy-image"
+                     style="height: 60px; width: auto;"
+                     loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="logo-fallback" style="display: none;">
+                    <div class="logo-main">GOEMON</div>
+                    <div class="logo-japanese">五右衛門</div>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">Legend</a></li>
+                <li><a href="#characters" class="nav-link">Characters</a></li>
+                <li><a href="#tokenomics" class="nav-link">Tokenomics</a></li>
+                <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+                <li><a href="#community" class="nav-link">Community</a></li>
+            </ul>
+            <button class="wallet-btn">Connect Wallet</button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <!-- Hero Background Image -->
+        <div class="hero-image-container">
+            <img src="./assets/images/backgrounds/Background.jpg" 
+                 alt="Traditional Japanese landscape with Mt. Fuji and ships"
+                 class="hero-background-image lazy-image"
+                 loading="lazy">
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="main-title">
+                    <div class="title-japanese">石川五右衛門</div>
+                    <div class="hero-logo-container">
+                        <img src="./assets/images/icons/Logo-type.png" 
+                             alt="GOEMON - 私たちは取る。私たちは与えます" 
+                             class="hero-logo-image lazy-image"
+                             loading="lazy"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="hero-logo-fallback" style="display: none;">
+                            <div class="title-main">GOEMON</div>
+                            <div class="title-subtitle-japanese">私たちは取る。私たちは与えます</div>
+                        </div>
+                    </div>
+                    <div class="title-subtitle">The Legendary Thief Token</div>
+                </div>
+                
+                <!-- Social Media Icons under title -->
+                <div class="social-icons">
+                    <a href="#" class="social-btn" aria-label="Twitter/X">
+                        <img src="./assets/images/icons/XTwitter Button.png" alt="Twitter/X" class="social-btn-img lazy-image">
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Telegram">
+                        <img src="./assets/images/icons/Telegram Button.png" alt="Telegram" class="social-btn-img lazy-image">
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Buy Token">
+                        <img src="./assets/images/icons/Buy Button-01.png" alt="Buy Token" class="social-btn-img lazy-image">
+                    </a>
+                </div>
+                
+                <p class="hero-tagline">"Steal from the institutions, give to the people. The rebellion against traditional finance starts here."</p>
+                <div class="hero-actions">
+                    <button class="btn-primary">Join The Rebellion</button>
+                    <button class="btn-secondary">Buy Token</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Demo Section (Optional) -->
+    <section class="section video-demo" style="display: none;">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Legend in Motion</h2>
+                <div class="section-decoration"></div>
+            </div>
+            <div class="video-container">
+                <!-- Video Background -->
+                <video class="video-background" autoplay muted loop playsinline>
+                    <source src="./assets/videos/goemon-demo.mp4" type="video/mp4">
+                    <source src="./assets/videos/goemon-demo.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay"></div>
+                <div class="video-content">
+                    <div class="section-container">
+                        <h3 style="color: var(--traditional-red); font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Experience the Rebellion</h3>
+                        <p style="color: var(--dark-brown); font-size: 1.3rem; text-align: center; max-width: 600px; margin: 0 auto;">Watch as Goemon's legend comes alive in the blockchain, stealing from institutions and giving power back to the people.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section - Story Layout -->
+    <section id="about" class="section about">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Legend Lives On</h2>
+                <div class="section-decoration"></div>
+            </div>
+            
+            <!-- Story Book Layout -->
+            <div class="story-book-layout">
+                <!-- Left Page - Text Content -->
+                <div class="story-page story-text-page">
+                    <div class="page-content">
+                        <h3>From Edo to DeFi</h3>
+                        <p>In the shadows of 16th century Japan, Ishikawa Goemon emerged as the ultimate rebel against the corrupt establishment. A master thief who dared to steal from the wealthy elite to help the common people.</p>
+                        
+                        <h3>The Eternal Conflict</h3>
+                        <p>The age-old battle between authority and the people continues. Where institutions hoard wealth and power, heroes like Goemon rise to challenge the status quo.</p>
+                        
+                        <div class="quote-highlight">
+                            "Even if you boil the seas and the rocks melt, there will always be thieves in this world."
+                            <br><small>- Ishikawa Goemon</small>
+                        </div>
+                        
+                        <h3>The Revolution</h3>
+                        <p>Today, Goemon's spirit lives on in the blockchain. The legendary thief has returned to lead the rebellion against traditional finance.</p>
+                    </div>
+                </div>
+                
+                <!-- Right Page - Story Illustration -->
+                <div class="story-page story-image-page">
+                    <div class="story-illustration-large">
+                        <div class="story-character-container-large">
+                            <img src="./assets/images/characters/hero-character.png" 
+                                 alt="Goemon the Legendary Thief - The Noble Phantom Thief" 
+                                 class="story-character-image-large lazy-image"
+                                 loading="lazy">
+                        </div>
+                        
+                        <!-- Alpha Video Background for story -->
+                        <div class="alpha-video-container">
+                            <video class="alpha-video" autoplay muted loop playsinline>
+                                <source src="./assets/videos/Koi 04.mov" type="video/mov">
+                                <source src="./assets/videos/Koi 03.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section id="characters" class="section characters">
+        <div class="section-container">
+            <div class="section-header">
+                <h1 class="section-title">Lore of Ishikawa Goemon</h1>
+                <div class="section-decoration"></div>
+            </div>
+            <div class="lore-content">
+                <div class="lore-side-image lore-left">
+                    <img src="./assets/images/icons/Logo.png" 
+                         alt="Goemon Logo" 
+                         class="lore-logo lazy-image"
+                         loading="lazy">
+                </div>
+                
+                <div class="lore-main-content">
+                    <div class="lore-title">石川五右衛門 (Ishikawa Goemon)</div>
+                    <div class="lore-subtitle">The Legendary Phantom Thief (1558-1594)</div>
+                    <div class="lore-description">
+                        Born during Japan's tumultuous Sengoku period, Goemon became the most famous outlaw in Japanese history. Operating during the Azuchi-Momoyama period, he led a band of thieves who stole from corrupt feudal lords and wealthy merchants, redistributing their wealth to suffering peasants. His legend transcended death when he was executed by being boiled alive on orders of Toyotomi Hideyoshi, becoming an eternal symbol of rebellion against tyrannical authority.
+                    </div>
+                </div>
+                
+                <div class="lore-side-image lore-right">
+                    <img src="./assets/images/icons/Logo.png" 
+                         alt="Goemon Logo" 
+                         class="lore-logo lazy-image"
+                         loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section - Redesigned Sacred Scroll -->
+    <section id="tokenomics" class="section tokenomics">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Sacred Scroll of Wealth</h2>
+                <div class="section-decoration"></div>
+            </div>
+            
+            <!-- Traditional Japanese Scroll Design -->
+            <div class="sacred-scroll-container">
+                <!-- Scroll Background with Video -->
+                <div class="scroll-background">
+                    <!-- Alpha Video Background -->
+                    <div class="alpha-video-container">
+                        <video class="alpha-video scroll-video" autoplay muted loop playsinline>
+                            <source src="./assets/videos/Koi 01.mov" type="video/mov">
+                            <source src="./assets/videos/Koi 03.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <!-- Scroll Content -->
+                    <div class="scroll-content">
+                        <!-- Traditional Scroll Header -->
+                        <div class="scroll-header">
+                            <div class="scroll-title">五右衛門令牌</div>
+                            <div class="scroll-subtitle">Sacred Treasury of the People</div>
+                        </div>
+                        
+                        <!-- Elegant Token Information -->
+                        <div class="scroll-sections">
+                            <div class="scroll-section">
+                                <div class="section-ornament">◈</div>
+                                <h4>Divine Properties</h4>
+                                <div class="elegant-info">
+                                    <div class="info-item">
+                                        <span class="info-symbol">∞</span>
+                                        <div class="info-details">
+                                            <div class="info-title">Total Supply</div>
+                                            <div class="info-desc">1,000,000,000 GOEMON</div>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-symbol">⚡</span>
+                                        <div class="info-details">
+                                            <div class="info-title">Network</div>
+                                            <div class="info-desc">Solana Blockchain</div>
+                                        </div>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-symbol">🗾</span>
+                                        <div class="info-details">
+                                            <div class="info-title">Tax</div>
+                                            <div class="info-desc">0% - True Freedom</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="scroll-section">
+                                <div class="section-ornament">◈</div>
+                                <h4>Sacred Distribution</h4>
+                                <div class="distribution-elegant">
+                                    <div class="dist-item">
+                                        <div class="dist-visual">
+                                            <div class="dist-circle" data-percent="70">
+                                                <span class="dist-percent">70%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-label">Liquidity Pool</div>
+                                    </div>
+                                    <div class="dist-item">
+                                        <div class="dist-visual">
+                                            <div class="dist-circle" data-percent="20">
+                                                <span class="dist-percent">20%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-label">Community</div>
+                                    </div>
+                                    <div class="dist-item">
+                                        <div class="dist-visual">
+                                            <div class="dist-circle" data-percent="5">
+                                                <span class="dist-percent">5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-label">Development</div>
+                                    </div>
+                                    <div class="dist-item">
+                                        <div class="dist-visual">
+                                            <div class="dist-circle" data-percent="5">
+                                                <span class="dist-percent">5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-label">Marketing</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contract Address -->
+                        <div class="scroll-footer">
+                            <div class="contract-section">
+                                <div class="contract-label">Sacred Contract</div>
+                                <div class="contract-address-elegant">Coming Soon</div>
+                                <div class="contract-note">Will be revealed at the moment of launch</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Traditional Scroll Decorations -->
+                <div class="scroll-rods">
+                    <div class="scroll-rod scroll-rod-left"></div>
+                    <div class="scroll-rod scroll-rod-right"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="section roadmap">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Journey of Rebellion</h2>
+                <div class="section-decoration"></div>
+            </div>
+            <div class="roadmap-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="roadmap-phase phase-completed">
+                    <div class="phase-content">
+                        <h3 class="phase-title">Phase 1: The Awakening</h3>
+                        <p class="phase-description">The legend begins with the birth of Goemon token on Solana blockchain.</p>
+                        <ul class="phase-features">
+                            <li>Token Launch & Smart Contract Deployment</li>
+                            <li>Initial Liquidity Pool Creation</li>
+                            <li>Community Building & Social Media</li>
+                            <li>Website Launch & Brand Identity</li>
+                        </ul>
+                        <span class="phase-status">Completed</span>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase phase-active">
+                    <div class="phase-content">
+                        <h3 class="phase-title">Phase 2: The Rebellion</h3>
+                        <p class="phase-description">Goemon's army grows as more rebels join the fight against traditional finance.</p>
+                        <ul class="phase-features">
+                            <li>Major DEX Listings (Raydium, Orca)</li>
+                            <li>Influencer Partnerships & KOL Network</li>
+                            <li>Community Rewards Program Launch</li>
+                            <li>First CEX Listing Applications</li>
+                        </ul>
+                        <span class="phase-status">In Progress</span>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase phase-upcoming">
+                    <div class="phase-content">
+                        <h3 class="phase-title">Phase 3: The Revolution</h3>
+                        <p class="phase-description">The movement spreads across the crypto world as institutional barriers fall.</p>
+                        <ul class="phase-features">
+                            <li>Tier 1 CEX Listings (Gate.io, MEXC)</li>
+                            <li>NFT Collection Drop (Goemon Legends)</li>
+                            <li>Staking Platform & Yield Farming</li>
+                            <li>DAO Governance Implementation</li>
+                        </ul>
+                        <span class="phase-status">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase phase-upcoming">
+                    <div class="phase-content">
+                        <h3 class="phase-title">Phase 4: The Legacy</h3>
+                        <p class="phase-description">Goemon's vision becomes reality as DeFi truly serves the people.</p>
+                        <ul class="phase-features">
+                            <li>Cross-chain Bridge Development</li>
+                            <li>Goemon DeFi Ecosystem Launch</li>
+                            <li>Real-world Utility Partnerships</li>
+                            <li>Global Adoption & Recognition</li>
+                        </ul>
+                        <span class="phase-status">Future Vision</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section community rebellion-section">
+        <div class="rebellion-background">
+            <div class="rebellion-overlay"></div>
+        </div>
+        <div class="section-container">
+            <div class="section-header rebellion-header">
+                <h2 class="section-title rebellion-title">🗡️ JOIN THE REBELLION 🗡️</h2>
+                <p class="rebellion-subtitle">Unite with fellow rebels against the tyranny of traditional finance</p>
+            </div>
+            
+            <!-- Enhanced Community Stats -->
+            <div class="rebellion-stats">
+                <div class="rebellion-stat">
+                    <div class="stat-icon">⚔️</div>
+                    <span class="stat-number-large">12K+</span>
+                    <p class="stat-description">Warriors Assembled</p>
+                </div>
+                <div class="rebellion-stat">
+                    <div class="stat-icon">🔥</div>
+                    <span class="stat-number-large">24/7</span>
+                    <p class="stat-description">Battle Ready</p>
+                </div>
+                <div class="rebellion-stat">
+                    <div class="stat-icon">💎</div>
+                    <span class="stat-number-large">∞</span>
+                    <p class="stat-description">Diamond Hands</p>
+                </div>
+            </div>
+            
+            <!-- Call to Action Banner -->
+            <div class="rebellion-cta-banner">
+                <h3 class="cta-banner-title">The Revolution Awaits</h3>
+                <p class="cta-banner-subtitle">Choose your weapon and join the fight for financial freedom</p>
+            </div>
+            
+            <!-- Enhanced Social Buttons -->
+            <div class="rebellion-weapons">
+                <a href="#" class="weapon-button twitter-weapon" aria-label="Follow us on Twitter/X">
+                    <div class="weapon-icon">
+                        <img src="./assets/images/icons/XTwitter Button.png" alt="Twitter/X" class="weapon-img lazy-image">
+                    </div>
+                    <div class="weapon-details">
+                        <span class="weapon-name">Information Warfare</span>
+                        <span class="weapon-desc">Follow on X/Twitter</span>
+                    </div>
+                </a>
+                
+                <a href="#" class="weapon-button telegram-weapon" aria-label="Join our Telegram">
+                    <div class="weapon-icon">
+                        <img src="./assets/images/icons/Telegram Button.png" alt="Telegram" class="weapon-img lazy-image">
+                    </div>
+                    <div class="weapon-details">
+                        <span class="weapon-name">Strategic Command</span>
+                        <span class="weapon-desc">Join Telegram HQ</span>
+                    </div>
+                </a>
+                
+                <a href="#" class="weapon-button buy-weapon" aria-label="Buy GOEMON Token">
+                    <div class="weapon-icon">
+                        <img src="./assets/images/icons/Buy Button-01.png" alt="Buy Token" class="weapon-img lazy-image">
+                    </div>
+                    <div class="weapon-details">
+                        <span class="weapon-name">Financial Strike</span>
+                        <span class="weapon-desc">Acquire $GOEMON</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="final-rebellion-call">
+                <div class="final-call-content">
+                    <h3 class="final-call-title">💀 Ready to Steal from the Rich? 💀</h3>
+                    <p class="final-call-text">The phantom thief's legacy lives on in every transaction. Join the legendary rebellion against centralized oppression.</p>
+                    <button class="btn-rebellion">⚡ Start Your Heist ⚡</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer enhanced-footer">
+        <div class="footer-background">
+            <div class="footer-pattern"></div>
+        </div>
+        
+        <div class="footer-content">
+            <!-- Logo Section -->
+            <div class="footer-section footer-logo-section">
+                <div class="footer-logo">
+                    <img src="./assets/images/icons/Logo-type.png" 
+                         alt="Goemon - The Legendary Phantom Thief" 
+                         class="footer-logo-img lazy-image"
+                         loading="lazy"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-fallback" style="display: none;">
+                        <div class="logo-main">GOEMON</div>
+                        <div class="logo-japanese">五右衛門</div>
+                    </div>
+                </div>
+                <p class="footer-tagline">
+                    "Even if the sands of the beach were all gone,<br>
+                    the world would never be without thieves."
+                </p>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="footer-section footer-nav-section">
+                <h4 class="footer-section-title">The Legend</h4>
+                <div class="footer-nav-links">
+                    <a href="#hero" class="footer-nav-link">Home</a>
+                    <a href="#about" class="footer-nav-link">Legend</a>
+                    <a href="#characters" class="footer-nav-link">Lore</a>
+                    <a href="#tokenomics" class="footer-nav-link">Sacred Scroll</a>
+                    <a href="#roadmap" class="footer-nav-link">Journey</a>
+                    <a href="#community" class="footer-nav-link">Rebellion</a>
+                </div>
+            </div>
+            
+            <!-- Social & Community -->
+            <div class="footer-section footer-community-section">
+                <h4 class="footer-section-title">Join the Rebellion</h4>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link twitter" aria-label="Follow on Twitter/X">
+                        <img src="./assets/images/icons/XTwitter Button.png" alt="Twitter/X" class="footer-social-img">
+                        <span>Twitter/X</span>
+                    </a>
+                    <a href="#" class="footer-social-link telegram" aria-label="Join Telegram">
+                        <img src="./assets/images/icons/Telegram Button.png" alt="Telegram" class="footer-social-img">
+                        <span>Telegram</span>
+                    </a>
+                    <a href="#" class="footer-social-link buy" aria-label="Buy Token">
+                        <img src="./assets/images/icons/Buy Button-01.png" alt="Buy Token" class="footer-social-img">
+                        <span>Buy $GOEMON</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Meme Coin Disclaimer -->
+        <div class="disclaimer-section">
+            <div class="disclaimer-container">
+                <h4 class="disclaimer-title">⚠️ MEME COIN DISCLAIMER ⚠️</h4>
+                <p class="disclaimer-text">
+                    <strong>$GOEMON is a meme coin created for entertainment purposes only.</strong> 
+                    This token has no intrinsic value, no expectation of financial return, and is not an investment. 
+                    Cryptocurrency investments are highly volatile and speculative. You may lose all of your investment. 
+                    Only invest what you can afford to lose completely. This project is experimental and for fun - 
+                    not financial advice. The legendary thief Ishikawa Goemon is a historical/cultural reference only. 
+                    Always do your own research (DYOR) before making any financial decisions.
+                </p>
+                <div class="risk-warning">
+                    <span class="risk-icon">⚡</span>
+                    <span>High Risk - Meme Token - Entertainment Only - Not Financial Advice</span>
+                    <span class="risk-icon">⚡</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 GOEMON Token | The Legend Lives On | Built by Rebels, For Rebels</p>
+                </div>
+                <div class="footer-legal-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#audit">Security Audit</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Randomized Floating Petals
+        function createRandomizedPetals() {
+            const petalContainer = document.getElementById('petalContainer');
+            const petalCount = 12; // Increased number of petals
+            const sizes = ['small', 'medium', 'large'];
+            
+            // Clear existing petals
+            petalContainer.innerHTML = '';
+            
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = '🌸';
+                
+                // Random size
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                petal.classList.add(randomSize);
+                
+                // Random horizontal position
+                const randomLeft = Math.random() * 100;
+                petal.style.left = randomLeft + '%';
+                
+                // Random animation duration (8-20 seconds)
+                const randomDuration = 8 + Math.random() * 12;
+                petal.style.animationDuration = randomDuration + 's';
+                
+                // Random delay (0-15 seconds)
+                const randomDelay = Math.random() * 15;
+                petal.style.animationDelay = randomDelay + 's';
+                
+                // Add slight random rotation speed variation
+                const randomRotationSpeed = 0.8 + Math.random() * 0.4; // 0.8x to 1.2x speed
+                petal.style.animationTimingFunction = 'linear';
+                
+                petalContainer.appendChild(petal);
+            }
+        }
+
+        // Mobile Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize randomized petals
+            createRandomizedPetals();
+            
+            // Recreate petals every 30 seconds for continuous randomization
+            setInterval(createRandomizedPetals, 30000);
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Close mobile menu
+                        if (navMenu && hamburger) {
+                            navMenu.classList.remove('active');
+                            hamburger.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // Wallet and button interactions (mockup)
+            const buttons = document.querySelectorAll('.wallet-btn, .btn-primary, .btn-secondary');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.textContent.includes('Connect')) {
+                        this.textContent = 'Connecting...';
+                        this.classList.add('loading');
+                        setTimeout(() => {
+                            this.textContent = 'Wallet Connected ✓';
+                            this.classList.remove('loading');
+                            this.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+                        }, 2000);
+                    } else if (this.textContent.includes('Buy') || this.textContent.includes('Join')) {
+                        alert('🚀 Redirecting to DEX... (This is a mockup!)');
+                    }
+                });
+            });
+
+            // Contract address copy functionality
+            const contractAddress = document.querySelector('.contract-address');
+            if (contractAddress) {
+                contractAddress.addEventListener('click', function() {
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText('Coming Soon - Contract Will Be Available At Launch').then(() => {
+                            const originalText = this.textContent;
+                            this.textContent = 'Copied!';
+                            this.style.background = 'rgba(76, 175, 80, 0.2)';
+                            setTimeout(() => {
+                                this.textContent = originalText;
+                                this.style.background = 'rgba(60, 36, 21, 0.1)';
+                            }, 2000);
+                        }).catch(() => {
+                            // Fallback for older browsers
+                            alert('Contract: Coming Soon - Contract Will Be Available At Launch');
+                        });
+                    } else {
+                        // Fallback for browsers without clipboard API
+                        alert('Contract: Coming Soon - Contract Will Be Available At Launch');
+                    }
+                });
+            }
+
+            // Social link interactions
+            const socialLinks = document.querySelectorAll('.social-link, .social-icon');
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const platform = this.textContent || 'Social Media';
+                    alert(`🔗 ${platform} coming soon! Follow our announcements for social media links.`);
+                });
+            });
+
+            // Add scroll effect to navigation
+            let ticking = false;
+            function updateNavigation() {
+                const nav = document.querySelector('.nav');
+                if (nav) {
+                    if (window.scrollY > 100) {
+                        nav.style.background = 'rgba(245, 245, 220, 0.98)';
+                        nav.style.boxShadow = '0 4px 20px rgba(60, 36, 21, 0.2)';
+                    } else {
+                        nav.style.background = 'var(--primary-cream)';
+                        nav.style.boxShadow = '0 2px 10px rgba(60, 36, 21, 0.1)';
+                    }
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavigation);
+                    ticking = true;
+                }
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for scroll animations
+            const animateElements = document.querySelectorAll('.character-card, .community-stat, .roadmap-phase');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Performance optimization: Pause animations when not visible
+            const handleVisibilityChange = () => {
+                if (document.hidden) {
+                    document.body.style.animationPlayState = 'paused';
+                } else {
+                    document.body.style.animationPlayState = 'running';
+                }
+            };
+
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+
+            // Background Music Auto-play with 50% volume
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            if (backgroundMusic) {
+                backgroundMusic.volume = 0.5; // 50% volume
+                
+                // Function to start music
+                const startMusic = () => {
+                    backgroundMusic.play().then(() => {
+                        console.log('Music started successfully');
+                        // Remove event listeners after music starts
+                        document.removeEventListener('click', startMusic);
+                        document.removeEventListener('keydown', startMusic);
+                        document.removeEventListener('touchstart', startMusic);
+                    }).catch(e => {
+                        console.log('Failed to start music:', e);
+                    });
+                };
+                
+                // Try immediate autoplay first
+                backgroundMusic.play().catch(() => {
+                    // If autoplay fails, wait for user interaction
+                    console.log('Autoplay blocked - waiting for user interaction');
+                    document.addEventListener('click', startMusic, { once: true });
+                    document.addEventListener('keydown', startMusic, { once: true });
+                    document.addEventListener('touchstart', startMusic, { once: true });
+                });
+            }
+
+            // Lazy Loading for Images
+            const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        
+                        // Handle image loading
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        
+                        // Add loaded class for transition
+                        img.classList.add('loaded');
+                        
+                        // Stop observing this image
+                        observer.unobserve(img);
+                        
+                        // Handle load/error events
+                        img.addEventListener('load', () => {
+                            img.classList.add('loaded');
+                        });
+                        
+                        img.addEventListener('error', () => {
+                            console.warn('Failed to load image:', img.src);
+                            // Try to show fallback content if available
+                            const fallback = img.nextElementSibling;
+                            if (fallback && fallback.classList.contains('character-main')) {
+                                img.style.display = 'none';
+                                fallback.style.display = 'flex';
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+
+            // Observe all lazy images
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            lazyImages.forEach(img => {
+                lazyImageObserver.observe(img);
+            });
+
+            // Video Loading and Error Handling
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('loadstart', () => {
+                    console.log('Video loading started');
+                });
+
+                video.addEventListener('canplaythrough', () => {
+                    console.log('Video can play through');
+                    // Show video section if hidden
+                    const videoSection = document.querySelector('.video-demo');
+                    if (videoSection && video.readyState >= 3) {
+                        // Uncomment to show video section when ready
+                        // videoSection.style.display = 'block';
+                    }
+                });
+
+                video.addEventListener('error', (e) => {
+                    console.warn('Video failed to load:', e);
+                    // Hide video section on error
+                    const videoSection = video.closest('.video-demo');
+                    if (videoSection) {
+                        videoSection.style.display = 'none';
+                    }
+                });
+            });
+
+            // Preload critical images
+            const criticalImages = [
+                './assets/images/backgrounds/Background.jpg',
+                './assets/images/characters/hero-character.png',
+                './assets/images/icons/Logo-type.png',
+                './assets/images/icons/Logo.png',
+                './assets/images/icons/XTwitter Button.png',
+                './assets/images/icons/Telegram Button.png',
+                './assets/images/icons/Buy Button-01.png'
+            ];
+
+            criticalImages.forEach(src => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
+            });
+        });
+
+        // Error handling for any potential issues
+        window.addEventListener('error', function(e) {
+            console.warn('Non-critical error:', e.message);
+        });
+    </script>
+</body>
+</html>

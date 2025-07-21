@@ -1,0 +1,45 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/twitter",
+      "destination": "https://twitter.com/goemon",
+      "permanent": false
+    },
+    {
+      "source": "/discord",
+      "destination": "https://discord.gg/goemon",
+      "permanent": false
+    },
+    {
+      "source": "/telegram",
+      "destination": "https://t.me/goemon",
+      "permanent": false
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/token",
+      "destination": "/#tokenomics",
+      "permanent": true
+    },
+    {
+      "source": "/community",
+      "destination": "/#community",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#about",
+      "permanent": true
+    }
+  ]
+}

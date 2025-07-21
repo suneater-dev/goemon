@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" style="background: linear-gradient(135deg, #F5F5DC 0%, #E6D7C3 100%);">
+  <!-- Traditional Japanese mountain landscape -->
+  <defs>
+    <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8D6E63;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#5D4037;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.9" />
+      <stop offset="70%" style="stop-color:#CC2936;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#8B0000;stop-opacity:0.5" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Sun -->
+  <circle cx="900" cy="120" r="80" fill="url(#sunGrad)" opacity="0.8"/>
+  
+  <!-- Mountains - layered for depth -->
+  <path d="M0,600 L0,350 L200,250 L400,320 L600,200 L800,280 L1000,180 L1200,250 L1200,600 Z" fill="url(#mountainGrad)" opacity="0.4"/>
+  <path d="M0,600 L0,400 L300,300 L500,360 L700,260 L900,320 L1200,280 L1200,600 Z" fill="url(#mountainGrad)" opacity="0.6"/>
+  <path d="M0,600 L0,450 L400,380 L600,420 L800,360 L1000,400 L1200,380 L1200,600 Z" fill="url(#mountainGrad)" opacity="0.8"/>
+  
+  <!-- Birds -->
+  <g fill="#3C2415" opacity="0.6">
+    <path d="M300,200 Q305,195 310,200 Q305,205 300,200 Z"/>
+    <path d="M320,180 Q325,175 330,180 Q325,185 320,180 Z"/>
+    <path d="M700,160 Q705,155 710,160 Q705,165 700,160 Z"/>
+  </g>
+  
+  <!-- Subtle texture overlay -->
+  <rect width="1200" height="600" fill="url(data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F4E4BC' fill-opacity='0.1'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E)" opacity="0.3"/>
+</svg>
