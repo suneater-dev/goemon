@@ -7,12 +7,13 @@ class GoemeonWeb3 {
         this.tokenMint = null; // Will be set when token is deployed
         this.connected = false;
         
-        // Initialize Solana connection with actually working endpoints
+        // Initialize Solana connection with working RPC endpoints
         this.rpcEndpoints = [
-            'https://api.devnet.solana.com',               // Devnet (always works, for demo)
-            'https://api.testnet.solana.com',              // Testnet (also reliable)
-            'https://solana-api.syndica.io/access-token/changeme/rpc', // Syndica demo
-            'https://api.mainnet-beta.solana.com'          // Official (rate limited)
+            'https://rpc.ankr.com/solana',                 // Ankr public (no key needed for basic queries)
+            'https://solana.public-rpc.com',               // Public RPC
+            'https://api.mainnet-beta.solana.com',         // Official Solana
+            'https://rpc.shyft.to',                        // Shyft public endpoint
+            'https://solana-rpc.publicnode.com'            // PublicNode
         ];
         this.currentRpcIndex = 0;
         this.connection = new solanaWeb3.Connection(
@@ -129,25 +130,56 @@ class GoemeonWeb3 {
         );
     }
     
-    // Get SOL balance - demo version due to RPC limitations
+    // Get real-time SOL balance with robust retry mechanism
     async getSolBalance() {
         if (!this.wallet) {
             console.log('Wallet not available');
             return 0;
         }
         
-        console.log('Note: Using demo balance due to free RPC endpoint limitations');
-        console.log('Connected wallet:', this.wallet.toString());
+        console.log('Fetching real SOL balance for:', this.wallet.toString());
         
-        // Show a notification about RPC limitations
-        this.showNotification('Demo Mode: Showing sample balance due to RPC rate limits 📊', 'info');
+        // Convert wallet to PublicKey if needed
+        const publicKey = typeof this.wallet === 'string' 
+            ? new solanaWeb3.PublicKey(this.wallet) 
+            : this.wallet;
         
-        // For demonstration, show a realistic SOL balance
-        // In production, you'd use a paid RPC endpoint
-        const demoBalance = Math.random() * 2 + 0.5; // Random balance between 0.5 and 2.5 SOL
+        // Try each RPC endpoint until one works
+        for (let i = 0; i < this.rpcEndpoints.length; i++) {
+            try {
+                const endpoint = this.rpcEndpoints[i];
+                console.log(`Trying endpoint ${i + 1}/${this.rpcEndpoints.length}: ${endpoint}`);
+                
+                // Create fresh connection for each attempt
+                const connection = new solanaWeb3.Connection(endpoint, 'confirmed');
+                
+                // Set a reasonable timeout
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Timeout')), 10000)
+                );
+                
+                const balancePromise = connection.getBalance(publicKey);
+                const balance = await Promise.race([balancePromise, timeoutPromise]);
+                
+                const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
+                console.log(`✅ Success! SOL balance: ${solBalance} (from ${endpoint})`);
+                
+                // Update our main connection to the working endpoint
+                this.currentRpcIndex = i;
+                this.connection = connection;
+                
+                return solBalance;
+                
+            } catch (error) {
+                console.log(`❌ Endpoint ${i + 1} failed: ${error.message}`);
+                // Continue to next endpoint
+            }
+        }
         
-        console.log('Demo SOL balance:', demoBalance);
-        return demoBalance;
+        // If all endpoints failed, show error
+        console.error('All RPC endpoints failed to fetch balance');
+        this.showNotification('Unable to fetch balance from any RPC endpoint 📡', 'error');
+        return 'Unable to fetch';
     }
     
     // Get SOL balance and update UI
@@ -163,7 +195,7 @@ class GoemeonWeb3 {
                 if (solBalance === 'Unable to fetch') {
                     heroBalanceElement.innerHTML = `Unable to fetch <button onclick="goemonWeb3.getTokenBalance()" style="background: #ff9800; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 8px;">↻ Retry</button>`;
                 } else {
-                    heroBalanceElement.innerHTML = `${solBalance.toFixed(4)} SOL <span style="font-size: 0.8rem; color: #ff9800; font-weight: normal;">(Demo)</span>`;
+                    heroBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
                 }
             }
             
