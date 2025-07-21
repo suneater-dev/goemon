@@ -34,6 +34,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Web3 Libraries -->
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/wallet-adapter-wallets@latest/lib/index.iife.js"></script>
+    
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -531,6 +535,408 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(204, 41, 54, 0.4);
             filter: brightness(1.1);
+        }
+        
+        .wallet-btn.connected {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+        }
+        
+        /* Wallet Info Display */
+        .wallet-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(245, 245, 220, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 245, 220, 0.2);
+        }
+        
+        .wallet-balance {
+            color: var(--primary-cream);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .disconnect-btn {
+            background: none;
+            border: none;
+            color: var(--primary-cream);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .disconnect-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Wallet Modal */
+        .wallet-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .wallet-modal-content {
+            background: var(--gradient-cream);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--soft-gold);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .wallet-modal-content h3 {
+            color: var(--dark-brown);
+            font-family: var(--font-decorative);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .wallet-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: var(--light-paper);
+            border: 2px solid var(--medium-brown);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+        
+        .wallet-option:hover {
+            background: var(--warm-beige);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .wallet-option.disconnect {
+            background: var(--traditional-red);
+            color: white;
+            border-color: var(--deep-red);
+        }
+        
+        .wallet-option.disconnect:hover {
+            background: var(--deep-red);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-brown);
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10001;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        }
+        
+        .notification-success {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        }
+        
+        .notification-error {
+            background: linear-gradient(135deg, #f44336, #c62828);
+        }
+        
+        .notification-warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+        }
+        
+        .notification-info {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+        }
+        
+        /* Price Display */
+        .token-price-display {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .price-info {
+            background: rgba(245, 245, 220, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--soft-gold);
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .price-label {
+            color: var(--primary-cream);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-right: 0.5rem;
+        }
+        
+        .token-price {
+            color: var(--gold-accent);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-right: 1rem;
+        }
+        
+        .price-change {
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        .price-change.positive {
+            color: white;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        }
+        
+        .price-change.negative {
+            color: white;
+            background: linear-gradient(135deg, #f44336, #c62828);
+        }
+        
+        .price-change.launch-pending {
+            color: white;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Jupiter Terminal Modal */
+        .jupiter-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .jupiter-modal-content {
+            background: var(--gradient-cream);
+            padding: 0;
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            border: 3px solid var(--gold-accent);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+        }
+        
+        .jupiter-header {
+            background: var(--gradient-red);
+            color: var(--primary-cream);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .jupiter-header h3 {
+            font-family: var(--font-decorative);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .close-jupiter {
+            background: none;
+            border: none;
+            color: var(--primary-cream);
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .close-jupiter:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .jupiter-terminal-container {
+            padding: 2rem;
+        }
+        
+        .swap-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .swap-input, .swap-output {
+            background: var(--light-paper);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--medium-brown);
+        }
+        
+        .swap-input label, .swap-output label {
+            display: block;
+            color: var(--dark-brown);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .input-group input {
+            flex: 1;
+            border: none;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-brown);
+        }
+        
+        .input-group input:focus {
+            outline: 2px solid var(--gold-accent);
+        }
+        
+        .token-symbol {
+            background: var(--gradient-brown);
+            color: var(--primary-cream);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .swap-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--traditional-red);
+            font-weight: bold;
+        }
+        
+        .swap-info {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #ffc107;
+            padding: 1rem;
+            border-radius: 10px;
+            color: var(--dark-brown);
+        }
+        
+        .swap-info p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .swap-button {
+            width: 100%;
+            background: var(--gradient-red);
+            color: var(--primary-cream);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .swap-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(204, 41, 54, 0.4);
+            filter: brightness(1.1);
+        }
+        
+        .swap-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .hamburger {
@@ -3150,9 +3556,19 @@
                 </div>
                 
                 <p class="hero-tagline">"Steal from the institutions, give to the people. The rebellion against traditional finance starts here."</p>
+                
+                <!-- Token Price Display -->
+                <div class="token-price-display">
+                    <div class="price-info">
+                        <span class="price-label">$GOEMON Price:</span>
+                        <span class="token-price">TBD</span>
+                        <span class="price-change">--</span>
+                    </div>
+                </div>
+                
                 <div class="hero-actions">
-                    <button class="btn-primary">Join The Rebellion</button>
-                    <button class="btn-secondary">Buy Token</button>
+                    <button class="btn-primary" id="join-rebellion-btn">Join The Rebellion</button>
+                    <button class="btn-secondary" id="buy-token-btn">Buy Token</button>
                 </div>
             </div>
         </div>
@@ -3945,5 +4361,8 @@
             console.warn('Non-critical error:', e.message);
         });
     </script>
+    
+    <!-- Web3 Integration -->
+    <script src="web3.js"></script>
 </body>
 </html>

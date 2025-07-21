@@ -32,30 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Wallet Connection (Placeholder)
-    const walletBtns = document.querySelectorAll('.wallet-connect-btn, .cta-primary');
-    walletBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            if (this.textContent.includes('Connect') || this.textContent.includes('Join')) {
-                alert('Wallet connection feature coming soon! 🥷💰');
-            }
-        });
-    });
+    // Web3 functionality is now handled in web3.js
+    // This section intentionally left minimal for backward compatibility
 
-    // Copy Contract Address
+    // Copy Contract Address - enhanced with Web3 integration
     const contractAddress = document.querySelector('.contract-address');
     if (contractAddress) {
-        contractAddress.addEventListener('click', function() {
-            navigator.clipboard.writeText(this.textContent).then(() => {
-                const originalText = this.textContent;
-                this.textContent = 'Copied!';
-                setTimeout(() => {
-                    this.textContent = originalText;
-                }, 2000);
-            });
-        });
+        contractAddress.addEventListener('click', copyContract);
         contractAddress.style.cursor = 'pointer';
-        contractAddress.title = 'Click to copy';
+        contractAddress.title = 'Click to copy contract address';
     }
 
     // Basic Scroll Animation Observer
