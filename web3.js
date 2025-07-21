@@ -7,9 +7,16 @@ class GoemeonWeb3 {
         this.tokenMint = null; // Will be set when token is deployed
         this.connected = false;
         
-        // Initialize Solana connection (mainnet-beta)
+        // Initialize Solana connection with reliable mainnet RPC endpoints
+        this.rpcEndpoints = [
+            'https://rpc.ankr.com/solana',    // Ankr public RPC (mainnet)
+            'https://solana.api.onfinality.io/public', // OnFinality public RPC
+            'https://solana-mainnet.rpc.extrnode.com', // ExtrNode reliable endpoint
+            'https://api.mainnet-beta.solana.com' // Official (as fallback)
+        ];
+        this.currentRpcIndex = 0;
         this.connection = new solanaWeb3.Connection(
-            'https://api.mainnet-beta.solana.com',
+            this.rpcEndpoints[this.currentRpcIndex],
             'confirmed'
         );
         
@@ -112,17 +119,60 @@ class GoemeonWeb3 {
         }
     }
     
-    // Get SOL balance
+    // Switch to next RPC endpoint if current one fails
+    switchRpcEndpoint() {
+        this.currentRpcIndex = (this.currentRpcIndex + 1) % this.rpcEndpoints.length;
+        console.log(`Switching to RPC endpoint: ${this.rpcEndpoints[this.currentRpcIndex]}`);
+        this.connection = new solanaWeb3.Connection(
+            this.rpcEndpoints[this.currentRpcIndex],
+            'confirmed'
+        );
+    }
+    
+    // Get SOL balance with automatic RPC failover
     async getSolBalance() {
-        if (!this.wallet || !this.connection) return 0;
-        
-        try {
-            const balance = await this.connection.getBalance(this.wallet);
-            return balance / solanaWeb3.LAMPORTS_PER_SOL;
-        } catch (error) {
-            console.error('Error getting SOL balance:', error);
+        if (!this.wallet || !this.connection) {
+            console.log('Wallet or connection not available');
             return 0;
         }
+        
+        let attempts = 0;
+        const maxAttempts = this.rpcEndpoints.length;
+        
+        while (attempts < maxAttempts) {
+            try {
+                console.log(`Attempt ${attempts + 1}: Fetching balance for wallet:`, this.wallet.toString());
+                console.log(`Using RPC: ${this.rpcEndpoints[this.currentRpcIndex]}`);
+                
+                // Convert wallet to PublicKey if needed
+                const publicKey = typeof this.wallet === 'string' 
+                    ? new solanaWeb3.PublicKey(this.wallet) 
+                    : this.wallet;
+                
+                const balance = await this.connection.getBalance(publicKey);
+                console.log('Raw balance (lamports):', balance);
+                
+                const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
+                console.log('SOL balance:', solBalance);
+                
+                return solBalance;
+            } catch (error) {
+                console.error(`RPC Error (${this.rpcEndpoints[this.currentRpcIndex]}):`, error.message);
+                
+                // If it's a 403 or rate limit error, try next endpoint
+                if (error.message.includes('403') || error.message.includes('429') || attempts < maxAttempts - 1) {
+                    attempts++;
+                    this.switchRpcEndpoint();
+                    continue;
+                }
+                
+                console.error('All RPC endpoints failed');
+                return 0;
+            }
+        }
+        
+        console.error('Exhausted all RPC endpoints');
+        return 0;
     }
     
     // Get SOL balance and update UI
