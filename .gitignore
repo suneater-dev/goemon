@@ -31,3 +31,7 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Large video files
+*.mov
+assets/videos/Koi*.mov
