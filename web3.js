@@ -449,6 +449,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Web3
     goemonWeb3 = new GoemeonWeb3();
     
+    // Initialize music controls
+    initializeMusicControls();
+    
     // Setup wallet connection buttons
     const walletBtn = document.querySelector('.wallet-btn');
     if (walletBtn) {
@@ -553,6 +556,74 @@ function copyWalletAddress() {
     } else {
         goemonWeb3.showNotification('No wallet connected', 'warning');
     }
+}
+
+// Music Control Functions
+function toggleMusic() {
+    const audio = document.getElementById('backgroundMusic');
+    const musicBtn = document.getElementById('musicControlBtn');
+    
+    if (!audio) {
+        console.error('Background music element not found');
+        return;
+    }
+    
+    if (audio.paused) {
+        // Play music
+        audio.play().then(() => {
+            musicBtn.textContent = '🎵';
+            musicBtn.classList.remove('muted');
+            musicBtn.title = 'Mute Music';
+            localStorage.setItem('musicEnabled', 'true');
+            console.log('Music started');
+        }).catch(error => {
+            console.error('Failed to play music:', error);
+            goemonWeb3?.showNotification('Unable to play music - browser blocked autoplay', 'warning');
+        });
+    } else {
+        // Pause music
+        audio.pause();
+        musicBtn.textContent = '🔇';
+        musicBtn.classList.add('muted');
+        musicBtn.title = 'Play Music';
+        localStorage.setItem('musicEnabled', 'false');
+        console.log('Music paused');
+    }
+}
+
+// Initialize music controls
+function initializeMusicControls() {
+    const audio = document.getElementById('backgroundMusic');
+    const musicBtn = document.getElementById('musicControlBtn');
+    
+    if (!audio || !musicBtn) return;
+    
+    // Check user preference from localStorage
+    const musicEnabled = localStorage.getItem('musicEnabled');
+    
+    if (musicEnabled === 'false') {
+        // User previously disabled music
+        audio.pause();
+        musicBtn.textContent = '🔇';
+        musicBtn.classList.add('muted');
+        musicBtn.title = 'Play Music';
+    } else {
+        // Default: try to play music
+        audio.play().then(() => {
+            musicBtn.textContent = '🎵';
+            musicBtn.classList.remove('muted');
+            musicBtn.title = 'Mute Music';
+            localStorage.setItem('musicEnabled', 'true');
+        }).catch(error => {
+            console.log('Autoplay blocked - music controls ready for user interaction');
+            musicBtn.textContent = '🔇';
+            musicBtn.classList.add('muted');
+            musicBtn.title = 'Play Music';
+        });
+    }
+    
+    // Add volume control (optional)
+    audio.volume = 0.5; // Set to 50% volume
 }
 
 // Add contract verification
