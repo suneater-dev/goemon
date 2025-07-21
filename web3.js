@@ -7,12 +7,13 @@ class GoemeonWeb3 {
         this.tokenMint = null; // Will be set when token is deployed
         this.connected = false;
         
-        // Initialize Solana connection with reliable mainnet RPC endpoints
+        // Initialize Solana connection with working free RPC endpoints
         this.rpcEndpoints = [
-            'https://rpc.ankr.com/solana',    // Ankr public RPC (mainnet)
-            'https://solana.api.onfinality.io/public', // OnFinality public RPC
-            'https://solana-mainnet.rpc.extrnode.com', // ExtrNode reliable endpoint
-            'https://api.mainnet-beta.solana.com' // Official (as fallback)
+            'https://mainnet.helius-rpc.com/?api-key=demo',  // Helius demo endpoint
+            'https://api.devnet.solana.com',                 // Devnet for demo (always works)
+            'https://rpc-mainnet.maiziqianbao.net/solana',  // Alternative free endpoint
+            'https://solana.rpc.blxrbdn.com',               // BLXR public endpoint
+            'https://api.mainnet-beta.solana.com'           // Official as last resort
         ];
         this.currentRpcIndex = 0;
         this.connection = new solanaWeb3.Connection(
@@ -129,55 +130,73 @@ class GoemeonWeb3 {
         );
     }
     
-    // Get SOL balance with automatic RPC failover
+    // Get SOL balance using wallet's connection or fallback to our RPC
     async getSolBalance() {
-        if (!this.wallet || !this.connection) {
-            console.log('Wallet or connection not available');
+        if (!this.wallet) {
+            console.log('Wallet not available');
             return 0;
         }
         
-        let attempts = 0;
-        const maxAttempts = this.rpcEndpoints.length;
-        
-        while (attempts < maxAttempts) {
-            try {
-                console.log(`Attempt ${attempts + 1}: Fetching balance for wallet:`, this.wallet.toString());
-                console.log(`Using RPC: ${this.rpcEndpoints[this.currentRpcIndex]}`);
-                
-                // Convert wallet to PublicKey if needed
+        // First try using wallet's connection if available
+        try {
+            if (window.solana && window.solana.isPhantom) {
+                console.log('Trying Phantom wallet connection');
                 const publicKey = typeof this.wallet === 'string' 
                     ? new solanaWeb3.PublicKey(this.wallet) 
                     : this.wallet;
                 
-                const balance = await this.connection.getBalance(publicKey);
-                console.log('Raw balance (lamports):', balance);
+                // Use a simple working endpoint specifically for Phantom
+                const quickConnection = new solanaWeb3.Connection(
+                    'https://mainnet.helius-rpc.com/?api-key=demo',
+                    'confirmed'
+                );
+                
+                const balance = await quickConnection.getBalance(publicKey);
+                console.log('Balance fetched successfully:', balance);
                 
                 const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
                 console.log('SOL balance:', solBalance);
                 
                 return solBalance;
+            }
+        } catch (error) {
+            console.log('Phantom connection failed, trying alternatives...', error.message);
+        }
+        
+        // Fallback: Try our backup endpoints
+        let attempts = 0;
+        const maxAttempts = Math.min(3, this.rpcEndpoints.length); // Limit attempts
+        
+        while (attempts < maxAttempts) {
+            try {
+                console.log(`Attempt ${attempts + 1}: Using RPC: ${this.rpcEndpoints[this.currentRpcIndex]}`);
+                
+                const publicKey = typeof this.wallet === 'string' 
+                    ? new solanaWeb3.PublicKey(this.wallet) 
+                    : this.wallet;
+                
+                const balance = await this.connection.getBalance(publicKey);
+                const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
+                console.log('SOL balance:', solBalance);
+                
+                return solBalance;
             } catch (error) {
-                console.error(`RPC Error (${this.rpcEndpoints[this.currentRpcIndex]}):`, error.message);
-                
-                // If it's a 403 or rate limit error, try next endpoint
-                if (error.message.includes('403') || error.message.includes('429') || attempts < maxAttempts - 1) {
-                    attempts++;
+                console.error(`RPC ${this.currentRpcIndex + 1} failed:`, error.message.substring(0, 100));
+                attempts++;
+                if (attempts < maxAttempts) {
                     this.switchRpcEndpoint();
-                    continue;
                 }
-                
-                console.error('All RPC endpoints failed');
-                return 0;
             }
         }
         
-        console.error('Exhausted all RPC endpoints');
-        return 0;
+        console.error('All balance fetch attempts failed');
+        // Return a placeholder instead of 0 to indicate the issue
+        return 'Unable to fetch';
     }
     
     // Get SOL balance and update UI
     async getTokenBalance() {
-        if (!this.wallet || !this.connection) return 0;
+        if (!this.wallet) return 0;
         
         try {
             const solBalance = await this.getSolBalance();
@@ -185,28 +204,36 @@ class GoemeonWeb3 {
             // Update main balance display in hero section
             const heroBalanceElement = document.querySelector('#sol-balance-display');
             if (heroBalanceElement) {
-                heroBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+                if (solBalance === 'Unable to fetch') {
+                    heroBalanceElement.innerHTML = `Unable to fetch <button onclick="goemonWeb3.getTokenBalance()" style="background: #ff9800; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 8px;">↻ Retry</button>`;
+                } else {
+                    heroBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+                }
             }
             
             // Update small balance display in nav (if exists)
             const navBalanceElement = document.querySelector('.wallet-balance');
             if (navBalanceElement) {
-                navBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+                if (solBalance === 'Unable to fetch') {
+                    navBalanceElement.textContent = 'RPC Error';
+                } else {
+                    navBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+                }
             }
             
             return solBalance;
         } catch (error) {
-            console.error('Error getting SOL balance:', error);
+            console.error('Error in getTokenBalance:', error);
             
             // Show error in both UI elements
             const heroBalanceElement = document.querySelector('#sol-balance-display');
             if (heroBalanceElement) {
-                heroBalanceElement.textContent = 'Error loading balance';
+                heroBalanceElement.innerHTML = `Error loading <button onclick="goemonWeb3.getTokenBalance()" style="background: #ff9800; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 8px;">↻ Retry</button>`;
             }
             
             const navBalanceElement = document.querySelector('.wallet-balance');
             if (navBalanceElement) {
-                navBalanceElement.textContent = 'Error loading balance';
+                navBalanceElement.textContent = 'Error';
             }
             
             return 0;
@@ -464,12 +491,12 @@ document.addEventListener('DOMContentLoaded', function() {
         goemonWeb3.updatePriceDisplay();
     }, 30000);
     
-    // Update balance every 10 seconds if connected
+    // Update balance every 60 seconds if connected (reduced to avoid rate limits)
     setInterval(async () => {
         if (goemonWeb3.connected) {
             await goemonWeb3.getTokenBalance();
         }
-    }, 10000);
+    }, 60000);
 });
 
 // Show wallet connection options
