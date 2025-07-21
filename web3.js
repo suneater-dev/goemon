@@ -54,10 +54,12 @@ class GoemeonWeb3 {
             
             console.log('Connected to wallet:', this.wallet.toString());
             this.updateUI();
-            await this.getTokenBalance();
             
             // Show success message
             this.showNotification('Wallet connected successfully! 🥷', 'success');
+            
+            // Fetch and display balance
+            await this.getTokenBalance();
             
         } catch (error) {
             console.error('Error connecting to Phantom:', error);
@@ -80,9 +82,11 @@ class GoemeonWeb3 {
             
             console.log('Connected to Solflare:', this.wallet.toString());
             this.updateUI();
-            await this.getTokenBalance();
             
             this.showNotification('Solflare wallet connected! ⚡', 'success');
+            
+            // Fetch and display balance
+            await this.getTokenBalance();
             
         } catch (error) {
             console.error('Error connecting to Solflare:', error);
@@ -137,6 +141,13 @@ class GoemeonWeb3 {
             return solBalance;
         } catch (error) {
             console.error('Error getting SOL balance:', error);
+            
+            // Show error in UI
+            const balanceElement = document.querySelector('.wallet-balance');
+            if (balanceElement) {
+                balanceElement.textContent = 'Error loading balance';
+            }
+            
             return 0;
         }
     }
@@ -156,6 +167,8 @@ class GoemeonWeb3 {
             // Create wallet info display if it doesn't exist
             if (!walletInfo) {
                 this.createWalletInfo();
+                // Fetch balance after creating wallet info
+                this.getTokenBalance();
             }
         } else {
             walletBtn.textContent = 'Connect Wallet';
@@ -174,7 +187,7 @@ class GoemeonWeb3 {
         const walletInfo = document.createElement('div');
         walletInfo.className = 'wallet-info';
         walletInfo.innerHTML = `
-            <div class="wallet-balance">0 SOL</div>
+            <div class="wallet-balance">Loading...</div>
             <button class="disconnect-btn" onclick="goemonWeb3.disconnect()">×</button>
         `;
         
