@@ -752,9 +752,143 @@
             animation: pulse 2s ease-in-out infinite;
         }
         
+        /* Wallet Status Display */
+        .wallet-status-display {
+            margin: 2rem 0;
+            text-align: center;
+            animation: slideInUp 0.5s ease;
+        }
+        
+        .wallet-status-card {
+            background: linear-gradient(135deg, rgba(245, 245, 220, 0.15), rgba(230, 215, 195, 0.2));
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--gold-accent);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .wallet-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .wallet-icon {
+            font-size: 2rem;
+        }
+        
+        .wallet-title {
+            color: var(--primary-cream);
+            font-family: var(--font-decorative);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .wallet-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .wallet-address-display, .sol-balance-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .address-label, .balance-label {
+            color: var(--warm-beige);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .wallet-address-text {
+            color: var(--primary-cream);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            margin: 0 1rem;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .sol-balance-amount {
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-left: 1rem;
+        }
+        
+        .copy-address-btn {
+            background: var(--gradient-brown);
+            border: none;
+            color: var(--primary-cream);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .copy-address-btn:hover {
+            background: var(--gradient-red);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .wallet-details {
+                gap: 0.8rem;
+            }
+            
+            .wallet-address-display, .sol-balance-display {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .wallet-address-text {
+                margin: 0;
+                font-size: 0.8rem;
+            }
+            
+            .sol-balance-amount {
+                margin: 0;
+                font-size: 1.3rem;
+            }
         }
         
         /* Jupiter Terminal Modal */
@@ -3557,6 +3691,27 @@
                 
                 <p class="hero-tagline">"Steal from the institutions, give to the people. The rebellion against traditional finance starts here."</p>
                 
+                <!-- Wallet Status Display -->
+                <div class="wallet-status-display" id="wallet-status-display" style="display: none;">
+                    <div class="wallet-status-card">
+                        <div class="wallet-header">
+                            <span class="wallet-icon">👛</span>
+                            <span class="wallet-title">Your Wallet</span>
+                        </div>
+                        <div class="wallet-details">
+                            <div class="wallet-address-display">
+                                <span class="address-label">Address:</span>
+                                <span class="wallet-address-text" id="wallet-address-display">Not Connected</span>
+                                <button class="copy-address-btn" id="copy-address-btn" onclick="copyWalletAddress()" title="Copy Address">📋</button>
+                            </div>
+                            <div class="sol-balance-display">
+                                <span class="balance-label">SOL Balance:</span>
+                                <span class="sol-balance-amount" id="sol-balance-display">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Token Price Display -->
                 <div class="token-price-display">
                     <div class="price-info">

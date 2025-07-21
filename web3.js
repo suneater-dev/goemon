@@ -132,20 +132,31 @@ class GoemeonWeb3 {
         try {
             const solBalance = await this.getSolBalance();
             
-            // Update UI with SOL balance
-            const balanceElement = document.querySelector('.wallet-balance');
-            if (balanceElement) {
-                balanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+            // Update main balance display in hero section
+            const heroBalanceElement = document.querySelector('#sol-balance-display');
+            if (heroBalanceElement) {
+                heroBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
+            }
+            
+            // Update small balance display in nav (if exists)
+            const navBalanceElement = document.querySelector('.wallet-balance');
+            if (navBalanceElement) {
+                navBalanceElement.textContent = `${solBalance.toFixed(4)} SOL`;
             }
             
             return solBalance;
         } catch (error) {
             console.error('Error getting SOL balance:', error);
             
-            // Show error in UI
-            const balanceElement = document.querySelector('.wallet-balance');
-            if (balanceElement) {
-                balanceElement.textContent = 'Error loading balance';
+            // Show error in both UI elements
+            const heroBalanceElement = document.querySelector('#sol-balance-display');
+            if (heroBalanceElement) {
+                heroBalanceElement.textContent = 'Error loading balance';
+            }
+            
+            const navBalanceElement = document.querySelector('.wallet-balance');
+            if (navBalanceElement) {
+                navBalanceElement.textContent = 'Error loading balance';
             }
             
             return 0;
@@ -156,25 +167,53 @@ class GoemeonWeb3 {
     updateUI() {
         const walletBtn = document.querySelector('.wallet-btn');
         const walletInfo = document.querySelector('.wallet-info');
+        const walletStatusDisplay = document.querySelector('#wallet-status-display');
+        const walletAddressDisplay = document.querySelector('#wallet-address-display');
         
         if (!walletBtn) return;
         
         if (this.connected && this.wallet) {
             const shortAddress = this.wallet.toString().slice(0, 4) + '...' + this.wallet.toString().slice(-4);
+            const fullAddress = this.wallet.toString();
+            
+            // Update nav button
             walletBtn.textContent = shortAddress;
             walletBtn.classList.add('connected');
             
-            // Create wallet info display if it doesn't exist
+            // Show prominent wallet status display
+            if (walletStatusDisplay) {
+                walletStatusDisplay.style.display = 'block';
+            }
+            
+            // Update wallet address in hero section
+            if (walletAddressDisplay) {
+                walletAddressDisplay.textContent = shortAddress;
+                walletAddressDisplay.setAttribute('data-full-address', fullAddress);
+            }
+            
+            // Create small wallet info in nav if it doesn't exist
             if (!walletInfo) {
                 this.createWalletInfo();
-                // Fetch balance after creating wallet info
-                this.getTokenBalance();
             }
+            
+            // Fetch balance after UI updates
+            this.getTokenBalance();
         } else {
             walletBtn.textContent = 'Connect Wallet';
             walletBtn.classList.remove('connected');
             
-            // Remove wallet info if exists
+            // Hide wallet status display
+            if (walletStatusDisplay) {
+                walletStatusDisplay.style.display = 'none';
+            }
+            
+            // Reset wallet address display
+            if (walletAddressDisplay) {
+                walletAddressDisplay.textContent = 'Not Connected';
+                walletAddressDisplay.removeAttribute('data-full-address');
+            }
+            
+            // Remove nav wallet info if exists
             if (walletInfo) {
                 walletInfo.remove();
             }
@@ -433,6 +472,22 @@ function closeJupiterModal() {
 // Execute swap (placeholder)
 function executeSwap() {
     goemonWeb3.showNotification('Swap functionality will be available at token launch! 🚀', 'info');
+}
+
+// Copy wallet address functionality
+function copyWalletAddress() {
+    const walletAddressDisplay = document.querySelector('#wallet-address-display');
+    const fullAddress = walletAddressDisplay?.getAttribute('data-full-address');
+    
+    if (fullAddress && goemonWeb3.connected) {
+        navigator.clipboard.writeText(fullAddress).then(() => {
+            goemonWeb3.showNotification('Wallet address copied! 📋', 'success');
+        }).catch(() => {
+            goemonWeb3.showNotification('Failed to copy address', 'error');
+        });
+    } else {
+        goemonWeb3.showNotification('No wallet connected', 'warning');
+    }
 }
 
 // Add contract verification
